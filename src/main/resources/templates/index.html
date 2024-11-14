@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Item Generator</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #2c3e50, #34495e); /* Sleek gradient */
+            background-size: cover; /* Ensure the gradient spans the whole viewport */
+            color: #ffffff; /* Bright text for readability */
+            padding: 20px;
+            margin: 0; /* Remove default browser margins */
+            height: 100vh; /* Full viewport height */
+            display: flex; /* Center content */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .item {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<h1>Magic Item Generator</h1>
+<button onclick="generateRandomItem()">Get a Random Item</button>
+<div id="item" class="item"></div>
+
+<script>
+    async function generateRandomItem() {
+        const response = await fetch('/items/random');
+        const item = await response.json();
+        document.getElementById('item').innerHTML = `
+                <strong>${item.name}</strong><br>
+                <em>${item.rarity}</em><br>
+                ${item.effect}<br>
+                <small>${item.description}</small>
+            `;
+    }
+</script>
+</body>
+</html>
